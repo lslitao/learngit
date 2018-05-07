@@ -1,0 +1,58 @@
+一、document文档
+  document对象还有一个cookie属性，可以获得当前页面的Cookie.
+  Cookie是由服务器发送的key-value标识符。因为HTTP协议是无状态的。但是服务器要区分到底
+  是那个用户发送过来的请求，就可以用Cookie来区分。当一个用户成功登录后，服务器发送一个
+  Cookie来区分。例如user=ABC123XYZ(加密的字符串)...，此后，浏览器访问该网站时，会在请求头
+  上附上这个Cookie，服务器根据Cookie即可区分出用户。
+  Cookie还可以存储网站的一些设置，例如，页面显示的语言等等。
+  JavaScript可以通过document.cookie来读取当前页面的Cookie.
+  history对象保存了浏览器历史记录history对象的back()或forward()
+二、操作DOM
+    由于HTML文档被浏览器解析后就是一棵DOM树。
+    DOM节点实际上就是：
+    更新：更新该节点的内容。
+    遍历：遍历该节点下的子节点。
+    添加：在该节点下添加一个子节点。
+    删除：将该节点从HTML删除。
+    要精确的选择DOM，可以先定位父节点，在从父节点开始选择，以缩小范围。
+    document.getElementByID("id").getElementByTagName("tr");
+    getElementByClassName 通过类名获得节点集合
+    .children获得某个节点下的所有直属的子节点。
+    .firstElementChild 第一个子节点
+    .lastElementChild 最后一个子节点
+    querySelector()//方法仅仅返回匹配指定选择器的第一个元素和querySelectorAll()//返回所有的元素集合
+    上面的是万能方法。
+    1、更新DOM
+      拿到一个DOM节点后，我们可以对它进行更新。
+      一种是修改innerHTML属性。
+      还可以嵌入HTML代码
+      如果写入的字符串是通过网路拿到的，要注意对字符编码来避免XSS
+      攻击。
+      第二种：修改innerText或textContent属性来添加内容。
+      这样可以自动的对字符串进行HTML编码，保证无法设置任何HTML标签
+      textContext可以获取节点包含的所有子节点的文本。
+      innerText不返回隐藏元素的文本。
+    2、插入DOM节点
+      如果我们获得了某个DOM节点，想在这个DOM节点内插入新的DOM，应该如何做
+      innerHTML="<span>child</span>"就可以修改DOM节点的内容，相当于插入啦新节点。
+      如果这个节点不是空的，那就不能这样做，因为innerHTML会替换掉原来的所有子节点。
+      正确方法：
+         1、使用appendChild,把一个节点添加到父节点的最后一个子节点。
+         可以在文档树中找个节点直接添加到文档中某个父节点内部。
+         从新创建一个节点
+         var d=document.createElement("style");
+         d.setAttribute("type","text/css");
+         d.innerHTML="p{color:red}";
+         documnet.getElementByTagName("head")[0].appendChild(d);
+         2、把子节点插入到指定位置方法
+         insertBefore(新节点，文档某个节点) 新节点插入某个节点之前。
+    3、删除DOM
+        要删除一个DOM节点首先得获得该节点本身以及它的父节点，然后，调用父节点的
+        removeChild把自己删掉。
+        var self=document.getElementById("to-be-removed");
+        var parent=self.parentElement;
+        var removed=parent.removeChild(self);
+        removed===self
+        注意删除后的节点虽然不在文档树中了，但其实还在内存中，可以随时再次被
+        添加到别的位置。
+        children属性是一个只读属性，并且它在子节点变化时会实时的变化更新。

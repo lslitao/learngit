@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function fimport() {
+            var selectFile = document.getElementById("files").files[0];
+            var name = selectFile.name;
+            var size = selectFile.size;
+            console.log("文件名：" + name + "大小" + size);
+            var reader = new FileReader();
+            reader.readAsDataURL(selectFile);
+            reader.onload = function () {
+                console.log(this.result);
+            }
+        }
+
+
+    </script>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="file" name="" id="files" onchange="fimport();">
+        <input type="button" value="导入" id="import">
+    </div>
+
+</body>
+
+</html>

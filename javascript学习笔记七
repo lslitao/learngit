@@ -1,0 +1,20 @@
+一、操作表单
+   我们获得一个<input>节点的引用，就可以直接调用value获得对应的用户输入值。
+   <input type="color" value="#cdf000"/> value的值必须是六个十六进制数
+   提交表单
+   通过<form>元素的submit()方法提交一个表单如下：
+   <form id="test-form">
+     <input type="text" name="test">
+     <button type="button" onclick="doSubmitForm()">Submit</button>
+   </form>
+   function doSubmitForm(){
+       var form=document.getElementById("test-form");
+       form.submit()
+   }
+   这种方式扰乱了浏览器form的正常提交。
+   浏览器默认点击<button type="submit">或者用户最后一个输入框按回车键。
+   return true来告诉浏览器继续提交，如果return false ,浏览器不会继续提交。
+   检查和修改<input>时，要充分利用<input type="hidden">
+   很多登录表单希望用户输入用户名和口令，但是，安全考虑，提交表单时不传输明文口令，
+   而是口令的MD5。
+   注意：没有name属性的<input>的数据不会被提交。

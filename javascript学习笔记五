@@ -1,0 +1,70 @@
+1、标准对象
+  为了区分对象类型，我们用typeof操作符获取对象的类型，它总是返回一个字符串。
+  typeof 123; "number"
+  typeof NaN; "number"
+  typeof "str"; "string"
+  typeof true; "boolean"
+  typeof undefined "undefined"
+  typeof Math.abs; "function"
+  typeof null; "Object"
+  typeof [];"Object"
+  typeof {}; "Object"
+2、包装对象
+  number=>number
+  string=>string
+  boolean=>Boolean
+  虽然包装对象看上去和原来的值一模一样，显示出来也是一模一样，但是
+  他们的类型以改变为对象。
+  闲的蛋疼也不要使用包装对象
+  注意：不要使用new Number() new Boolean() new String()来创建包装对象
+       用parseInt()或parseFloat()来转换任意类型到number;
+       用String()来转换任意类型到string,或者直接调用某个对象的toString()方法。
+       typeof操作符可以判断number boolean string function undefined
+       判断Array要使用Array.isArray(arr)
+       判断null要使用myVal===null
+       判断某个全局变量是否存在使用typeof window.myVal===="undefined"
+       函数内部判断某个变量是否存在用 typeof myVal==="undefined"
+       null和undefined没有toString()方法。
+3、Date
+   用来表示日期和时间。
+   var now =new Date();
+   now.getFullYear();
+   now.getMonth();
+   now.getDate();
+   now.getDay();
+   now.getHours();
+   now.getMinutes();
+   now.getSeconds();
+   now.getMilliseconds();
+   now.getTime(); //以number形式表示时间
+   浏览器都是从本机操作系统获取的时间。所以不一定准
+   JavaScript的Date对象月份值从0开始11表示12月
+   Date.prase("日期字符串")
+4、JSON
+   JSON是JavaScript Object Notation的缩写，它是一种数据交换方式。
+   JSON规定字符集必须是UTF-8，为了统一解析，JSON的字符串必须用“”，
+   Object的键必须用双引号。
+   把任何javascript对象变成JSON,就是把这个对象序列化成一个JSON格式的字符串这样才能
+   通过网路传递给其他计算机。如果我们收到一个JSON格式的字符串，只需要
+   把它反序列化成一个javascript对象，就可以在javascript中直接使用这个对象了。
+   1、序列化
+     JSON.stringify(对象名)
+   2、发序列化
+     JSON.prase(json字符串)
+5、面向对象编程
+   1、类
+     类是对象的类型模板。
+   2、实例
+     实例是根据类创建的对象。
+
+   JavaScript中，这个概念需要改一改。Javascript不区分类和实例的概念。
+   而是通过原型实现面向对象编程。
+   xiaoming.__proto__=Student
+   javascript没有class概念,所有对象都是实例。所谓的继承关系只不过是把一个对象
+   的原型指向另一个对象而已。
+   3、创建对象的方法
+     function createStudent(name){
+         var s=Object.create(Student);
+         s.name=name;
+         return s;
+     }
